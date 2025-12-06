@@ -241,7 +241,37 @@ class ManipulacionArchivo {
         private Pila pilaLetras = new Pila(27);
 
         ManipulacionArchivo manejadorArchivo = new ManipulacionArchivo();
+        
+        public JuegoAhorcado() {
+        }
 
+        public String[] getPalabrasEspanol() {
+            return palabrasEspanol;
+        }
+
+        public String[] getPalabrasIngles() {
+            return palabrasIngles;
+        }
+
+        public String[] getPalabras() {
+            return palabras;
+        }
+
+        public String getPalabraSecreta() {
+            return palabraSecreta;
+        }
+
+        public void setPalabraSecreta(String palabraSecreta) {
+            this.palabraSecreta = palabraSecreta;
+        }
+
+        public int getContError() {
+            return contError;
+        }
+
+        public void setContError(int contError) {
+            this.contError = contError;
+        }
     }
 	
 }
