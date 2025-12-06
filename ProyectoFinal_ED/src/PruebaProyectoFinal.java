@@ -41,6 +41,19 @@ class Pila {
         }
         return resultado;
     }
+    
+    public boolean contiene(String elemento) {
+        for (int i = 0; i <= tope; i++) {
+            if (elementos[i] != null && elementos[i].equalsIgnoreCase(elemento)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getTamanio() {
+        return tope + 1;
+    }
 }
 
 public class PruebaProyectoFinal {
