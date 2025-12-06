@@ -86,8 +86,12 @@ interface ahorcadoInterface {
     public String elegirPalabra(String palabras[]);
 }
 
+//==================== CLASE MANIPULACION ARCHIVO ====================
+class ManipulacionArchivo {
+	private String rutaArchivo = "./Palabras/palabras.txt";
+ 
 
-
+}
 public class PruebaProyectoFinal {
 
 	public static void main(String[] args) {
