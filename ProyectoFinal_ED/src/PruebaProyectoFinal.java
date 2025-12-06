@@ -181,6 +181,46 @@ class ManipulacionArchivo {
         return palabras;
     }
     
+ // Metodo auxiliar para comparar Strings
+    public int compararStrings(String a, String b) {
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+
+        int i = 0;
+        while (i < a.length() && i < b.length()) {
+            if (a.charAt(i) != b.charAt(i))
+                return a.charAt(i) - b.charAt(i);
+            i++;
+        }
+
+        return a.length() - b.length();
+    }
+
+  //============= ALGORITMO DE BUSQUEDA: BUSQUEDA BINARIA =============
+    public int busquedaBinaria(String[] arr, String elemento) {
+        int izq = 0;
+        int der = arr.length - 1;
+
+        while (izq <= der) {
+            int medio = izq + (der - izq) / 2;
+
+            int comparacion = compararStrings(arr[medio], elemento);
+
+            if (comparacion == 0) {
+                return medio; 
+            }
+
+            if (comparacion < 0) {
+                izq = medio + 1; 
+            } else {
+                der = medio - 1;
+            }
+        }
+
+        return -1; 
+    }
+    
+    
 
 	
 }
