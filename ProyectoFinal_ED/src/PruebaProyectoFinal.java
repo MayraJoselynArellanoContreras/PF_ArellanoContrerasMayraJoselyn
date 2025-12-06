@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 // ==================== CLASE PILA ====================
 class Pila {
@@ -114,6 +116,33 @@ class ManipulacionArchivo {
 	    return contenidoCompleto;
 	}
 
+	public void guardarPalabras(String contenido) {
+        File archivo = new File(rutaArchivo);
+        FileWriter fw = null;
+        PrintWriter pw = null;
+
+        try {
+            archivo.delete();
+            archivo.createNewFile();
+
+            fw = new FileWriter(archivo, false);
+            pw = new PrintWriter(fw);
+            pw.print(contenido);
+
+            System.out.println("Las palabras han sido guardadas correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (pw != null) pw.close();
+            try {
+                if (fw != null) fw.close();
+            } catch (IOException e) {
+                System.out.println("Error al cerrar archivo");
+            }
+        }
+    }
+	
+	
 }
 public class PruebaProyectoFinal {
 
