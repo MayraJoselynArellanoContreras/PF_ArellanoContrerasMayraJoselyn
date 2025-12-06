@@ -1,4 +1,7 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 // ==================== CLASE PILA ====================
 class Pila {
@@ -90,7 +93,27 @@ interface ahorcadoInterface {
 class ManipulacionArchivo {
 	private String rutaArchivo = "./Palabras/palabras.txt";
 
-	
+	public String lecturaArchivo(File archivo) {
+	    String ln = null;
+	    String contenidoCompleto = "";
+	    String lns = "\n"; 
+
+	    try {
+	        FileReader fr = new FileReader(archivo);
+	        BufferedReader br = new BufferedReader(fr);
+
+	        while ((ln = br.readLine()) != null) {
+	            contenidoCompleto = contenidoCompleto + ln + lns;
+	        }
+
+	        br.close();
+	    } catch (IOException e) {
+	        System.out.println("Error al leer el archivo");
+	    }
+
+	    return contenidoCompleto;
+	}
+
 }
 public class PruebaProyectoFinal {
 
