@@ -172,7 +172,16 @@ class ManipulacionArchivo {
         return i + 1;
     }
 
-	
+//============= ALGORITMO DE ORDENAMIENTO: QUICKSORT =============
+    public String[] ordenarPalabras(String[] palabras) {
+        if (palabras == null || palabras.length <= 1) {
+            return palabras;
+        }
+        quickSort(palabras, 0, palabras.length - 1);
+        return palabras;
+    }
+    
+
 	
 }
 public class PruebaProyectoFinal {
