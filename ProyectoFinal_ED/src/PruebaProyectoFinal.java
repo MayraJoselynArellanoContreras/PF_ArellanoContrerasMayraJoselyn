@@ -33,6 +33,14 @@ class Pila {
         }
         return null;
     }
+    
+    public String[] obtenerElementos() {
+        String[] resultado = new String[tope + 1];
+        for (int i = 0; i <= tope; i++) {
+            resultado[i] = elementos[i];
+        }
+        return resultado;
+    }
 }
 
 public class PruebaProyectoFinal {
