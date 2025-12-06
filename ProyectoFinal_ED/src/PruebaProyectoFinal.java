@@ -220,7 +220,10 @@ class ManipulacionArchivo {
     }
     
     
-
+ // ==================== CLASE JUEGO AHORCADO ====================
+    class JuegoAhorcado extends OportunidadesUsuario implements ahorcadoInterface {
+    	
+    }
 	
 }
 public class PruebaProyectoFinal {
