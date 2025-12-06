@@ -17,6 +17,22 @@ class Pila {
     public boolean estaLlena() {
         return tope == capacidad - 1;
     }
+    
+    public void apilar(String elemento) {
+        if (!estaLlena()) {
+            tope++;
+            elementos[tope] = elemento;
+        }
+    }
+
+    public String desapilar() {
+        if (!estaVacia()) {
+            String elemento = elementos[tope];
+            tope--;
+            return elemento;
+        }
+        return null;
+    }
 }
 
 public class PruebaProyectoFinal {
