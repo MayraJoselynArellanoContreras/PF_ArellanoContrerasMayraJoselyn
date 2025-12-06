@@ -1,4 +1,6 @@
 
+
+// ==================== CLASE PILA ====================
 class Pila {
 	private String[] elementos;
     private int tope;
@@ -55,6 +57,29 @@ class Pila {
         return tope + 1;
     }
 }
+
+//==================== CLASE OPORTUNIDADES ====================
+class OportunidadesUsuario {
+ private int oportunidades = 8;
+
+ 	public OportunidadesUsuario() {
+ 	}
+
+ 	public OportunidadesUsuario(int oportunidades) {
+ 		this.oportunidades = oportunidades;
+ 	}
+
+ 	public int getOportunidades() {
+ 		return oportunidades;
+ 	}
+
+ 	public void setOportunidades(int oportunidades) {
+ 		this.oportunidades = oportunidades;
+ 	}
+ 	
+}
+
+
 
 public class PruebaProyectoFinal {
 
