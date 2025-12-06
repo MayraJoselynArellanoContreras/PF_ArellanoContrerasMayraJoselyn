@@ -89,8 +89,8 @@ interface ahorcadoInterface {
 //==================== CLASE MANIPULACION ARCHIVO ====================
 class ManipulacionArchivo {
 	private String rutaArchivo = "./Palabras/palabras.txt";
- 
 
+	
 }
 public class PruebaProyectoFinal {
 
