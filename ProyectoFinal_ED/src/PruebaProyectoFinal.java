@@ -275,8 +275,7 @@ class ManipulacionArchivo {
 
 		@Override
 		public String lecturaArchivo(File archivo) {
-			
-			return null;
+			return manejadorArchivo.lecturaArchivo(archivo);
 		}
 
 		@Override
