@@ -272,8 +272,27 @@ class ManipulacionArchivo {
         public void setContError(int contError) {
             this.contError = contError;
         }
+
+		@Override
+		public String lecturaArchivo(File archivo) {
+			
+			return null;
+		}
+
+		@Override
+		public String[] cargarPalabras() {
+			
+			return null;
+		}
+
+		@Override
+		public String elegirPalabra(String[] palabras) {
+			
+			return null;
+		}
     }
-	
+    
+   
 }
 public class PruebaProyectoFinal {
 
