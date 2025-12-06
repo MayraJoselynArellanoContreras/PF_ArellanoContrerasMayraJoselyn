@@ -1,4 +1,4 @@
-
+import java.io.File;
 
 // ==================== CLASE PILA ====================
 class Pila {
@@ -77,6 +77,13 @@ class OportunidadesUsuario {
  		this.oportunidades = oportunidades;
  	}
  	
+}
+
+//==================== INTERFAZ AHORCADO ====================
+interface ahorcadoInterface {
+	public String lecturaArchivo(File archivo);
+    public String[] cargarPalabras();
+    public String elegirPalabra(String palabras[]);
 }
 
 
