@@ -9,6 +9,14 @@ class Pila {
         this.elementos = new String[capacidad];
         this.tope = -1;
     }
+    
+    public boolean estaVacia() {
+        return tope == -1;
+    }
+
+    public boolean estaLlena() {
+        return tope == capacidad - 1;
+    }
 }
 
 public class PruebaProyectoFinal {
