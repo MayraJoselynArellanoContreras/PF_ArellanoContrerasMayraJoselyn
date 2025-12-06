@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 // ==================== CLASE PILA ====================
 class Pila {
@@ -223,6 +224,24 @@ class ManipulacionArchivo {
  // ==================== CLASE JUEGO AHORCADO ====================
     class JuegoAhorcado extends OportunidadesUsuario implements ahorcadoInterface {
     	
+    	Scanner entrada = new Scanner(System.in);
+
+        private String palabrasEspanol[];
+        private String palabrasIngles[];
+        private String palabras[];
+        private int numero;
+        private String palabraSecreta;
+
+        private String alfabeto = "abcdefghijklmnñopqrstuvwxyz";
+
+        private int contError = 0;
+        private int contLetra = 0;
+
+        // Pila para almacenar letras ingresadas
+        private Pila pilaLetras = new Pila(27);
+
+        ManipulacionArchivo manejadorArchivo = new ManipulacionArchivo();
+
     }
 	
 }
