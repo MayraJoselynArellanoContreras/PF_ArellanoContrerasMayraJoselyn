@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -280,8 +281,51 @@ class ManipulacionArchivo {
 
 		@Override
 		public String[] cargarPalabras() {
-			
-			return null;
+			String ruta = "./Palabras/palabras.txt";
+	        String txt = "";
+	        String txtQueVaQuedando = "";
+
+	        try {
+	            FileReader fr = new FileReader(ruta);
+	            BufferedReader br = new BufferedReader(fr);
+
+	            while ((txt = br.readLine()) != null) {
+	                txtQueVaQuedando = txtQueVaQuedando + txt;
+	            }
+
+	            br.close();
+
+	            String txtE = txtQueVaQuedando.toUpperCase().substring(0, txtQueVaQuedando.indexOf("/"));
+	            String txtI = txtQueVaQuedando.toUpperCase().substring(txtQueVaQuedando.indexOf("/") + 1, txtQueVaQuedando.length());
+
+	            palabrasEspanol = txtE.split(",");
+	            palabrasIngles = txtI.split(",");
+
+	            // Ordenar palabras usando el algoritmo de ordenamiento
+	            palabrasEspanol = manejadorArchivo.ordenarPalabras(palabrasEspanol);
+	            palabrasIngles = manejadorArchivo.ordenarPalabras(palabrasIngles);
+
+	            palabras = new String[palabrasEspanol.length + palabrasIngles.length];
+
+	            int k;
+	            for (k = 0; k < palabrasEspanol.length; k++) {
+	                palabras[k] = palabrasEspanol[k];
+	            }
+
+	            numero = k;
+
+	            for (int e = 0; e < palabrasIngles.length; e++) {
+	                palabras[k] = palabrasIngles[e];
+	                k++;
+	            }
+
+	        } catch (FileNotFoundException e) {
+	            System.out.println("No se encontró el archivo...");
+	        } catch (IOException e) {
+	            System.out.println("Hubo un error en la lectura");
+	        }
+
+	        return palabras;
 		}
 
 		@Override
