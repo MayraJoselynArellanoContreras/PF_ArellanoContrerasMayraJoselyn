@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -36,7 +37,7 @@ class Pila {
         }
     }
 
-    public String desapilar() {
+    public String quitarElementoDePila() {
         if (!estaVacia()) {
             String elemento = elementos[tope];
             tope--;
@@ -62,14 +63,14 @@ class Pila {
         return false;
     }
 
-    public int getTamanio() {
+    public int getTamaño() {
         return tope + 1;
     }
 }//class Pila
 
 //==================== CLASE OPORTUNIDADES ====================
 class OportunidadesUsuario {
- private int oportunidades = 8;
+ private int oportunidades = 10;
 
  	public OportunidadesUsuario() {
  	}
@@ -111,8 +112,6 @@ class ManipulacionArchivo {
 	        while ((ln = br.readLine()) != null) {
 	            contenidoCompleto = contenidoCompleto + ln + lns;
 	        }
-
-	        br.close();
 	    } catch (IOException e) {
 	        System.out.println("Error al leer el archivo");
 	    }
@@ -133,7 +132,7 @@ class ManipulacionArchivo {
             pw = new PrintWriter(fw);
             pw.print(contenido);
 
-            System.out.println("Las palabras han sido guardadas correctamente.");
+            //System.out.println("Las palabras han sido guardadas correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -230,7 +229,7 @@ class ManipulacionArchivo {
     	
     	Scanner entrada = new Scanner(System.in);
 
-        private String palabrasEspanol[];
+        private String palabrasEspañol[];
         private String palabrasIngles[];
         private String palabras[];
         private int numero;
@@ -243,6 +242,8 @@ class ManipulacionArchivo {
 
         // Pila para almacenar letras ingresadas
         private Pila pilaLetras = new Pila(27);
+        // Pila para almacenar letras ingresadas que no estan en la palabra
+        private Pila letrasIncorrectas = new Pila(27);
 
         ManipulacionArchivo manejadorArchivo = new ManipulacionArchivo();
         
@@ -250,7 +251,7 @@ class ManipulacionArchivo {
         }
 
         public String[] getPalabrasEspanol() {
-            return palabrasEspanol;
+            return palabrasEspañol;
         }
 
         public String[] getPalabrasIngles() {
@@ -301,18 +302,18 @@ class ManipulacionArchivo {
 	            String txtE = txtQueVaQuedando.toUpperCase().substring(0, txtQueVaQuedando.indexOf("/"));
 	            String txtI = txtQueVaQuedando.toUpperCase().substring(txtQueVaQuedando.indexOf("/") + 1, txtQueVaQuedando.length());
 
-	            palabrasEspanol = txtE.split(",");
+	            palabrasEspañol = txtE.split(",");
 	            palabrasIngles = txtI.split(",");
 
 	            // Ordenar palabras usando el algoritmo de ordenamiento
-	            palabrasEspanol = manejadorArchivo.ordenarPalabras(palabrasEspanol);
+	            palabrasEspañol = manejadorArchivo.ordenarPalabras(palabrasEspañol);
 	            palabrasIngles = manejadorArchivo.ordenarPalabras(palabrasIngles);
 
-	            palabras = new String[palabrasEspanol.length + palabrasIngles.length];
+	            palabras = new String[palabrasEspañol.length + palabrasIngles.length];
 
 	            int k;
-	            for (k = 0; k < palabrasEspanol.length; k++) {
-	                palabras[k] = palabrasEspanol[k];
+	            for (k = 0; k < palabrasEspañol.length; k++) {
+	                palabras[k] = palabrasEspañol[k];
 	            }
 
 	            numero = k;
@@ -425,7 +426,7 @@ class ManipulacionArchivo {
 	        this.pilaLetras = new Pila(27);
 	        this.contError = 0;
 	        this.contLetra = 0;
-	        setOportunidades(8);
+	        setOportunidades(10);
 
 	        System.out.println("\n¡Bienvenido al juego del Ahorcado!");
 	        System.out.println("Estoy pensando en una palabra de " + getPalabraSecreta().length() + " letras.");
@@ -469,6 +470,8 @@ class ManipulacionArchivo {
 	                if (palabraSecreta.contains(letraPalabra)) {
 	                    System.out.println("\n¡Bien hecho: " + obtenerPalabraAdivinada(this.palabraSecreta, pilaLetras) + "!");
 	                } else {
+	                	letrasIncorrectas.apilar(letraPalabra);
+	                	
 	                    System.out.println("\nOops! Esa letra no está en la palabra secreta: " + obtenerPalabraAdivinada(this.palabraSecreta, pilaLetras));
 	                    setOportunidades(getOportunidades() - 1);
 	                    setContError(getContError() + 1);
@@ -478,6 +481,9 @@ class ManipulacionArchivo {
 	                        System.out.println("Lo siento, te has quedado sin oportunidades para adivinar.");
 	                        System.out.println("NO HAS ADIVINADO LA PALABRA.");
 	                        System.out.println("La palabra secreta era: " + palabraSecreta);
+	                        System.out.println("Letras incorrectas: " + 
+	    	                        Arrays.toString(letrasIncorrectas.obtenerElementos())
+	    	                            .replaceAll("[\\[\\]]", "").replace(", ", " "));
 	                    }
 	                }
 	            }
@@ -487,6 +493,9 @@ class ManipulacionArchivo {
 	                System.out.println("¡Felicidades, has GANADO!");
 	                System.out.println("La palabra era: " + palabraSecreta);
 	                System.out.println("Durante la partida, obtuviste un total de: " + getContError() + " errores");
+	                System.out.println("Letras incorrectas: " + 
+	                        Arrays.toString(letrasIncorrectas.obtenerElementos())
+	                            .replaceAll("[\\[\\]]", "").replace(", ", " "));
 	                setOportunidades(0);
 	            }
 	           
@@ -679,7 +688,7 @@ class PruebaJuegoAhorcado {
                             if (valida) {
                                 pi = true;
                             } else {
-                                System.out.println("❌ Carácter inválido, ingresa una palabra válida");
+                                System.out.println("Carácter inválido, ingresa una palabra válida");
                             }
 
                         } catch (InputMismatchException e) {
@@ -698,7 +707,7 @@ class PruebaJuegoAhorcado {
                     break;
 
                 default:
-                    System.out.println("❌ El carácter que ingresaste no se encuentra dentro de las opciones");
+                    System.out.println("El carácter que ingresaste no se encuentra dentro de las opciones");
             }
 
         } while (opcionLlenado != '3');
