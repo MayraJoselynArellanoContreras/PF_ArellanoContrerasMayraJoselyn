@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 import java.util.Scanner;
 
 // ==================== CLASE PILA ====================
@@ -330,8 +331,17 @@ class ManipulacionArchivo {
 
 		@Override
 		public String elegirPalabra(String[] palabras) {
-			
-			return null;
+			Random gnr = new Random();
+	        int nr = gnr.nextInt(palabras.length);
+	        palabraSecreta = palabras[nr];
+
+	        if (nr <= numero - 1) {
+	            System.out.println("La palabra generada fue en Español...");
+	        } else {
+	            System.out.println("La palabra generada fue en Inglés...");
+	        }
+
+	        return palabraSecreta;
 		}
     }
     
