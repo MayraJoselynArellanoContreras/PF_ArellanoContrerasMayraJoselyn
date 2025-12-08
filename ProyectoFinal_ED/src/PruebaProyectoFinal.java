@@ -362,6 +362,35 @@ class ManipulacionArchivo {
 
 	        return contadorLetrasAcertadas == palabraSecreta.length();
     }
+	    
+	 // Método: obtenerLetrasDisponibles
+	    public String obtenerLetrasDisponibles(Pila letrasIngresadas) {
+	        String[] alfabetoArray = new String[alfabeto.length()];
+	        String[] letrasIng = letrasIngresadas.obtenerElementos();
+
+	        for (int i = 0; i < alfabeto.length(); i++) {
+	            alfabetoArray[i] = "" + alfabeto.charAt(i);
+	        }
+
+	        // Usar algoritmo de búsqueda para verificar si la letra ya fue ingresada
+	        for (int pos = 0; pos < alfabetoArray.length; pos++) {
+	            String letraActual = alfabetoArray[pos];
+
+	            for (int j = 0; j < letrasIng.length; j++) {
+	                if (letrasIng[j] != null && letrasIng[j].equalsIgnoreCase(letraActual)) {
+	                    alfabetoArray[pos] = "-";
+	                    break;
+	                }
+	            }
+	        }
+
+	        String resultado = "";
+	        for (int i = 0; i < alfabetoArray.length; i++) {
+	            resultado = resultado + alfabetoArray[i];
+	        }
+
+	        return resultado;
+	    }
     
    
 }//class JuegoAhorcado
