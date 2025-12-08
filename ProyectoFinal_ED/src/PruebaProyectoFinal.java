@@ -391,6 +391,17 @@ class ManipulacionArchivo {
 
 	        return resultado;
 	    }
+	    
+	    public void inicioJuegoAhorcado(String palabrasecreta) {
+	    	this.palabraSecreta = palabrasecreta;
+	        this.pilaLetras = new Pila(27);
+	        this.contError = 0;
+	        this.contLetra = 0;
+	        setOportunidades(8);
+
+	        System.out.println("\n¡Bienvenido al juego del Ahorcado!");
+	        System.out.println("Estoy pensando en una palabra de " + getPalabraSecreta().length() + " letras.");
+	    }
     
    
 }//class JuegoAhorcado
