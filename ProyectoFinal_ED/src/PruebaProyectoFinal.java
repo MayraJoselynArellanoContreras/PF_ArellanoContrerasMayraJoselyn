@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -401,8 +402,36 @@ class ManipulacionArchivo {
 
 	        System.out.println("\n¡Bienvenido al juego del Ahorcado!");
 	        System.out.println("Estoy pensando en una palabra de " + getPalabraSecreta().length() + " letras.");
-	    }
-    
+	        
+	        do {
+	            System.out.println("\n------------");
+	            System.out.println("Te quedan " + getOportunidades() + " oportunidades para adivinar.");
+	            System.out.print("Letras disponibles: ");
+	            System.out.println(obtenerLetrasDisponibles(pilaLetras));
+
+	            boolean caracterValido = false;
+	            String letraIng = "";
+
+	            while (!caracterValido) {
+	                System.out.print("Por favor ingresa una letra: ");
+
+	                try {
+	                    letraIng = entrada.next();
+
+	                    if (letraIng.toUpperCase().charAt(0) >= 65 && letraIng.toUpperCase().charAt(0) <= 90 && letraIng.length() == 1 || letraIng.toUpperCase().charAt(0) == 'Ñ') {
+	                        caracterValido = true;
+	                    } else {
+	                        System.out.println("Carácter inválido, prueba de nuevo");
+	                    }
+
+	                } catch (InputMismatchException e) {
+	                    System.out.println("Entrada inválida");
+	                    entrada.next();
+	                }
+	            }
+	    }while (getOportunidades() != 0);
+
+	}
    
 }//class JuegoAhorcado
 public class PruebaProyectoFinal {
