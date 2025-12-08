@@ -64,7 +64,7 @@ class Pila {
     public int getTamanio() {
         return tope + 1;
     }
-}
+}//class Pila
 
 //==================== CLASE OPORTUNIDADES ====================
 class OportunidadesUsuario {
@@ -85,7 +85,7 @@ class OportunidadesUsuario {
  		this.oportunidades = oportunidades;
  	}
  	
-}
+}//class Oportunidades
 
 //==================== INTERFAZ AHORCADO ====================
 interface ahorcadoInterface {
@@ -222,7 +222,8 @@ class ManipulacionArchivo {
         return -1; 
     }
     
-    
+}//class Archivo   
+
  // ==================== CLASE JUEGO AHORCADO ====================
     class JuegoAhorcado extends OportunidadesUsuario implements ahorcadoInterface {
     	
@@ -343,10 +344,27 @@ class ManipulacionArchivo {
 
 	        return palabraSecreta;
 		}
+		
+		// Método: seAdivinoLaPalabra
+	    public boolean seAdivinoLaPalabra(String palabraSecreta, Pila letrasIng) {
+	        int contadorLetrasAcertadas = 0;
+	        String[] letrasIngresadas = letrasIng.obtenerElementos();
+
+	        for (int d = 0; d < palabraSecreta.length(); d++) {
+	            String letra = palabraSecreta.substring(d, d + 1);
+
+	            for (int l = 0; l < letrasIngresadas.length; l++) {
+	                if (letra.equals(letrasIngresadas[l])) {
+	                    contadorLetrasAcertadas++;
+	                }
+	            }
+	        }
+
+	        return contadorLetrasAcertadas == palabraSecreta.length();
     }
     
    
-}
+}//class JuegoAhorcado
 public class PruebaProyectoFinal {
 
 	public static void main(String[] args) {
