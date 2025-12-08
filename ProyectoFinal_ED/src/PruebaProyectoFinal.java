@@ -495,6 +495,74 @@ class ManipulacionArchivo {
 	}
    
 }//class JuegoAhorcado
+    
+ // ==================== CLASE PRUEBA JUEGO AHORCADO ====================
+class PruebaJuegoAhorcado {
+    Scanner entrada = new Scanner(System.in);
+    ManipulacionArchivo manejadorArchivo = new ManipulacionArchivo();
+    private int partidasJugadas = 0;
+
+    public void menuJuegoAhorcado() {
+        char opcionMenu = '0';
+
+        do {
+            System.out.println("\n===== Menú Ahorcado =====");
+            System.out.println("1) Verificar archivo de palabras");
+            System.out.println("2) Llenar archivo con palabras");
+            System.out.println("3) Borrar archivo de palabras");
+            System.out.println("4) Jugar partida");
+            System.out.println("5) Salir del juego");
+            System.out.print("-----> Elige la opción que te gustaría realizar: ");
+
+            try {
+                opcionMenu = entrada.next().charAt(0);
+            } catch (InputMismatchException e) {
+                System.out.println("Ingresaste un carácter que no aparece en las opciones, intenta nuevamente");
+            }
+
+            switch (opcionMenu) {
+                case '1':
+                    verificarArchivoVacio();
+                    break;
+
+                case '2':
+                    llenarArchivo();
+                    break;
+
+                case '3':
+                    borrarArchivo();
+                    break;
+
+                case '4':
+                    if (verificarArchivoVacio()) {
+                        System.out.println("El archivo se encuentra vacío");
+                        System.out.println("Ingresa palabras");
+                        llenarArchivo();
+                    } else {
+                        partidasJugadas++;
+                        JuegoAhorcado juegoAhorcado = new JuegoAhorcado();
+                        String[] palabrasCargadas = juegoAhorcado.cargarPalabras();
+                        System.out.println("\nCargando lista de palabras desde archivo...");
+                        System.out.println(palabrasCargadas.length + " palabras cargadas.\n");
+                        juegoAhorcado.inicioJuegoAhorcado(juegoAhorcado.elegirPalabra(palabrasCargadas));
+                    }
+                    break;
+
+                case '5':
+                    System.out.println("\nCerrando programa...");
+                    System.out.println("Total de partidas jugadas: " + partidasJugadas);
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Opción inválida, ingresa una de las opciones mostradas...");
+                    break;
+            }
+
+        } while (opcionMenu != '5');
+    }
+    
+}
 public class PruebaProyectoFinal {
 
 	public static void main(String[] args) {
