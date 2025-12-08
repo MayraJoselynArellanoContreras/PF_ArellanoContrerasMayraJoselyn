@@ -736,7 +736,12 @@ class PruebaJuegoAhorcado {
 public class PruebaProyectoFinal {
 
 	public static void main(String[] args) {
-		
+		 System.out.println("=======================================================");
+	     System.out.println("           J U E G O   D E L   A H O R C A D O");
+	     System.out.println("========================================================");
+
+	        PruebaJuegoAhorcado prueba = new PruebaJuegoAhorcado();
+	        prueba.menuJuegoAhorcado();
 
 	}
 
