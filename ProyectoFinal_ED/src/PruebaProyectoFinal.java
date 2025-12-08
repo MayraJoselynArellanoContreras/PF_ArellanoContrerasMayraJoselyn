@@ -364,6 +364,33 @@ class ManipulacionArchivo {
 	        return contadorLetrasAcertadas == palabraSecreta.length();
     }
 	    
+	    // Método: obtenerPalabraAdivinada
+	    public String obtenerPalabraAdivinada(String palabraSecreta, Pila letrasIng) {
+	        String palabraSeparada[] = new String[palabraSecreta.length()];
+	        String[] letrasIngresadas = letrasIng.obtenerElementos();
+
+	        for (int j = 0; j < palabraSeparada.length; j++) {
+	            palabraSeparada[j] = "_";
+	        }
+
+	        for (int i = 0; i < palabraSecreta.length(); i++) {
+	            String letra = palabraSecreta.substring(i, i + 1);
+
+	            for (int j = 0; j < letrasIngresadas.length; j++) {
+	                if (letrasIngresadas[j].equals(letra)) {
+	                    palabraSeparada[i] = letra;
+	                }
+	            }
+	        }
+
+	        String palabraMostrada = "";
+	        for (int s = 0; s < palabraSeparada.length; s++) {
+	            palabraMostrada = palabraMostrada + palabraSeparada[s] + " ";
+	        }
+
+	        return palabraMostrada.trim();
+	    }
+	    
 	 // Método: obtenerLetrasDisponibles
 	    public String obtenerLetrasDisponibles(Pila letrasIngresadas) {
 	        String[] alfabetoArray = new String[alfabeto.length()];
@@ -429,6 +456,7 @@ class ManipulacionArchivo {
 	                    entrada.next();
 	                }
 	            }
+	           
 	    }while (getOportunidades() != 0);
 
 	}
