@@ -562,6 +562,176 @@ class PruebaJuegoAhorcado {
         } while (opcionMenu != '5');
     }
     
+    public boolean verificarArchivoVacio() {
+        File archivo = new File("./Palabras/palabras.txt");
+        String palabrasE = "";
+        String palabrasI = "";
+
+        String palabras[] = manejadorArchivo.lecturaArchivo(archivo).split("/");
+        if (palabras.length >= 2) {
+            palabrasE = palabras[0];
+            palabrasI = palabras[1];
+        }
+
+        palabrasE = palabrasE.trim();
+        palabrasI = palabrasI.trim();
+
+        String palabrasCombinadas = palabrasE + palabrasI;
+
+        int contPalabras = 0;
+
+        if (palabrasE.length() > 0) {
+            contPalabras = contPalabras + palabrasE.length() - palabrasE.replace(",", "").length() + 1;
+        }
+
+        if (palabrasI.length() > 0) {
+            contPalabras = contPalabras + palabrasI.length() - palabrasI.replace(",", "").length() + 1;
+        }
+
+        System.out.println("El archivo contiene un total de: " + contPalabras + " palabras");
+
+        return archivo.exists() && palabrasCombinadas.length() == 0;
+    }
+
+    public void llenarArchivo() {
+        File archivo = new File("./Palabras/palabras.txt");
+
+        String palabrasEnEspanol = "";
+        String palabrasEnIngles = "";
+
+        String palabras[] = manejadorArchivo.lecturaArchivo(archivo).split("/");
+        if (palabras.length >= 2) {
+            palabrasEnEspanol = palabras[0];
+            palabrasEnIngles = palabras[1];
+        }
+
+        palabrasEnEspanol = palabrasEnEspanol.trim();
+        palabrasEnIngles = palabrasEnIngles.trim();
+
+        char opcionLlenado = '0';
+
+        do {
+            System.out.println("\n===== Menú de llenado =====");
+            System.out.println("== Instrucciones ==");
+            System.out.println("Para el llenado del archivo:");
+            System.out.println("1) Ingresar una palabra en español");
+            System.out.println("2) Ingresar una palabra en inglés");
+            System.out.println("3) Salir");
+            System.out.print("Ingresa una opción: ");
+
+            opcionLlenado = entrada.next().charAt(0);
+
+            switch (opcionLlenado) {
+                case '1':
+                    String palEsp = "";
+                    boolean ps = false;
+
+                    while (!ps) {
+                        System.out.print("Ingresa una palabra en español: ");
+                        try {
+                            palEsp = entrada.next().toLowerCase();
+
+                            boolean valida = true;
+                            for (int i = 0; i < palEsp.length(); i++) {
+                                char c = palEsp.charAt(i);
+                                if (!((c >= 'a' && c <= 'z') || c == 'ñ')) {
+                                    valida = false;
+                                    break;
+                                }
+                            }
+
+                            if (valida) {
+                                ps = true;
+                            } else {
+                                System.out.println("Ingresa un carácter válido...");
+                            }
+
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error de entrada");
+                        }
+                    }
+
+                    if (palabrasEnEspanol.length() > 0) {
+                        palabrasEnEspanol = palabrasEnEspanol + "," + palEsp;
+                    } else {
+                        palabrasEnEspanol = palEsp;
+                    }
+                    break;
+
+                case '2':
+                    String palIng = "";
+                    boolean pi = false;
+
+                    while (!pi) {
+                        System.out.print("Ingresa una palabra en inglés: ");
+                        try {
+                            palIng = entrada.next().toLowerCase();
+
+                            boolean valida = true;
+                            for (int i = 0; i < palIng.length(); i++) {
+                                char c = palIng.charAt(i);
+                                if (!(c >= 'a' && c <= 'z')) {
+                                    valida = false;
+                                    break;
+                                }
+                            }
+
+                            if (valida) {
+                                pi = true;
+                            } else {
+                                System.out.println("❌ Carácter inválido, ingresa una palabra válida");
+                            }
+
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error de entrada");
+                        }
+                    }
+
+                    if (palabrasEnIngles.length() > 0) {
+                        palabrasEnIngles = palabrasEnIngles + "," + palIng;
+                    } else {
+                        palabrasEnIngles = palIng;
+                    }
+                    break;
+
+                case '3':
+                    break;
+
+                default:
+                    System.out.println("❌ El carácter que ingresaste no se encuentra dentro de las opciones");
+            }
+
+        } while (opcionLlenado != '3');
+
+        String palabrasYaEnArchivo = palabrasEnEspanol + "/" + palabrasEnIngles;
+        manejadorArchivo.guardarPalabras(palabrasYaEnArchivo);
+    }
+
+    public void borrarArchivo() {
+        File archivo = new File("./Palabras/palabras.txt");
+        FileWriter fw = null;
+        PrintWriter pw = null;
+
+        try {
+            archivo.delete();
+            System.out.println("Archivo borrado exitosamente... ✅");
+            archivo.createNewFile();
+            fw = new FileWriter(archivo, false);
+            pw = new PrintWriter(fw);
+            pw.print("/");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (pw != null) pw.close();
+            try {
+                if (fw != null) fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 }
 public class PruebaProyectoFinal {
 
