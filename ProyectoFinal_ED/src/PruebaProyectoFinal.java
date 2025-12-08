@@ -456,6 +456,39 @@ class ManipulacionArchivo {
 	                    entrada.next();
 	                }
 	            }
+	            
+	            String letraPalabra = letraIng.toUpperCase();
+
+	            // Verificar si la letra ya fue ingresada
+	            if (pilaLetras.contiene(letraPalabra)) {
+	                System.out.println("\nOops! Ya habías ingresado esa letra: " + obtenerPalabraAdivinada(this.palabraSecreta, pilaLetras));
+	            } else {
+	                // Apilar la letra en la pila
+	                pilaLetras.apilar(letraPalabra);
+
+	                if (palabraSecreta.contains(letraPalabra)) {
+	                    System.out.println("\n¡Bien hecho: " + obtenerPalabraAdivinada(this.palabraSecreta, pilaLetras) + "!");
+	                } else {
+	                    System.out.println("\nOops! Esa letra no está en la palabra secreta: " + obtenerPalabraAdivinada(this.palabraSecreta, pilaLetras));
+	                    setOportunidades(getOportunidades() - 1);
+	                    setContError(getContError() + 1);
+
+	                    if (getOportunidades() == 0) {
+	                        System.out.println("\n------------");
+	                        System.out.println("Lo siento, te has quedado sin oportunidades para adivinar.");
+	                        System.out.println("NO HAS ADIVINADO LA PALABRA.");
+	                        System.out.println("La palabra secreta era: " + palabraSecreta);
+	                    }
+	                }
+	            }
+
+	            if (seAdivinoLaPalabra(this.palabraSecreta, pilaLetras)) {
+	                System.out.println("\n------------");
+	                System.out.println("¡Felicidades, has GANADO!");
+	                System.out.println("La palabra era: " + palabraSecreta);
+	                System.out.println("Durante la partida, obtuviste un total de: " + getContError() + " errores");
+	                setOportunidades(0);
+	            }
 	           
 	    }while (getOportunidades() != 0);
 
